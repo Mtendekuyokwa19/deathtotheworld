@@ -96,11 +96,14 @@
   environment.systemPackages = with pkgs; [
     vim
     wget
+    swaybg
+    swww
     neovim
     home-manager
     rustc
     fuzzel
     cargo
+    brightnessctl
     gcc
     zathura
     kitty
@@ -113,6 +116,7 @@
     ripgrep
     waybar
     sway
+
     niri
     google-chrome
     neofetch
@@ -127,7 +131,7 @@
     wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
     mako
   ];
-
+  programs.light.enable = true;
   environment.variables.EDITOR = "vim";
 
   # Enable XDG desktop portals - SIMPLIFIED VERSION (WLR only)

@@ -12,8 +12,19 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages =
-    [ pkgs.hello pkgs.waybar pkgs.jujutsu pkgs.niri pkgs.kitty pkgs.oh-my-zsh ];
+  home.packages = [
+
+    pkgs.google-chrome
+    pkgs.hello
+    pkgs.waybar
+    pkgs.jujutsu
+    pkgs.niri
+    pkgs.swaybg
+    pkgs.swww
+    pkgs.brightnessctl
+    pkgs.kitty
+    pkgs.oh-my-zsh
+  ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.

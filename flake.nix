@@ -18,14 +18,20 @@
         deathtotheworld = lib.nixosSystem {
           inherit system;
 
-          modules =
-            [ ./configuration.nix ]; # Points to your system's config file
+          modules = [
+            ./configuration.nix
+
+            { nixpkgs.config.allowUnfree = true; }
+          ]; # Points to your system's config file
         };
       };
       homeConfigurations = {
         mtende = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = [ ./home.nix ]; # Points to your system's config file
+          pkgs = import nixpkgs {
+            system = "x86_64-linux";
+            config.allowUnfree = true;
+          };
+          modules = [ ./home.nix ];
         };
       };
     };
