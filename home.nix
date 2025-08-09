@@ -18,6 +18,7 @@
     pkgs.waybar
     pkgs.zathura
     pkgs.jujutsu
+    pkgs.python3
     pkgs.niri
     pkgs.swaybg
     pkgs.swww
@@ -45,6 +46,7 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+  programs.python3.enable = true;
 
   # Sway configuration - FIXED VERSION
   wayland.windowManager.sway = {
