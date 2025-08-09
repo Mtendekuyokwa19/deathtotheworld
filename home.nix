@@ -5,7 +5,7 @@
   # manage.
   home.username = "mtende";
   home.homeDirectory = "/home/mtende";
-  imports = [ ./sh.nix ];
+  imports = [ ./links.nix ./sh.nix ];
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
@@ -19,8 +19,11 @@
   # environment.
   home.packages = [
     pkgs.hello
+    pkgs.waybar
     pkgs.jujutsu
     pkgs.kitty
+    pkgs.xdg-desktop-portal
+    pkgs.xdg-desktop-portal-wlr
     pkgs.oh-my-zsh
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
@@ -53,6 +56,21 @@
     # '';
   };
 
+  home.sessionVariables = {
+    XDG_SESSION_TYPE = "wayland";
+    XDG_CURRENT_DESKTOP = "sway";
+    XDG_SESSION_DESKTOP = "sway";
+    GDK_BACKEND = "wayland";
+    XDG_PORTAL_BACKEND = "wlr";
+    EDITOR = "vim ";
+  };
+
+  # Enable xdg-desktop-portal with WLR backend for Sway
+  services.xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
+  };
+
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. These will be explicitly sourced when using a
   # shell provided by Home Manager. If you don't want to manage your shell
@@ -69,11 +87,11 @@
   #
   #  /etc/profiles/per-user/mtende/etc/profile.d/hm-session-vars.sh
   #
-  home.sessionVariables = { EDITOR = "vim "; };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  programs.waybar = { enable = true; };
   #dots
 
 }

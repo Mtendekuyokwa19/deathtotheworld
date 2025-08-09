@@ -15,7 +15,15 @@
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.useOSProber = true;
-
+  programs.hyprland = {
+    enable = true;
+    # set the flake package
+    package =
+      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    # make sure to also set the portal package, so that they are in sync
+    portalPackage =
+      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+  };
   networking.hostName = "deathtotheworld"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -125,6 +133,7 @@
     ripgrep
     lua
     waybar
+    sway
     neofetch
     rustup
     curl
@@ -137,7 +146,7 @@
     wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
     mako
   ];
-
+  programs.waybar.enable = true;
   environment.variables.EDITOR = "vim";
   programs.sway = {
     enable = true;
