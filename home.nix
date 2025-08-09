@@ -5,7 +5,7 @@
   # manage.
   home.username = "mtende";
   home.homeDirectory = "/home/mtende";
-  imports = [ ./vim.nix ./sh.nix ];
+  imports = [ ./sh.nix ];
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.

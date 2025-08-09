@@ -3,5 +3,8 @@
   xdg.configFile."sway".source = ./sway;
   xdg.configFile."waybar".source = ./waybar;
 
+programs.neovim={
+enable=true;
+}
 }
 
