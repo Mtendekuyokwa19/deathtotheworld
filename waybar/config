@@ -5,7 +5,7 @@
     "height": 34,
     "modules-left": [
         "custom/logo",
-        "hyprland/workspaces"
+        "niri/workspaces"
     ],
     "modules-center": [
         "clock"
@@ -26,7 +26,7 @@
         "icon-size": 25,
         "tooltip-format": "{title}"
     },
-    "hyprland/workspaces": {
+    "niri/workspaces": {
         "on-click": "activate",
         "format": "{icon}",
         "format-icons": {
