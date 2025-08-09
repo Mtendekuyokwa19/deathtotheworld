@@ -7,7 +7,7 @@
 }
 
 window#waybar {
-  background-color: #181825;
+  background-color: #191919;
   transition-property: background-color;
   transition-duration: 0.5s;
 }
@@ -30,24 +30,24 @@ window#waybar.hidden {
   padding: 6px 18px;
   margin: 6px 3px;
   border-radius: 4px;
-  background-color: #1e1e2e;
-  color: #cdd6f4;
+  background-color: #2c2c2c;
+  color: #b7c5d3;
 }
 
 #workspaces button.active {
-  color: #1e1e2e;
-  background-color: #cdd6f4;
+  color: #191919;
+  background-color: #b7c5d3;
 }
 
 #workspaces button:hover {
   box-shadow: inherit;
   text-shadow: inherit;
-  color: #1e1e2e;
-  background-color: #cdd6f4;
+  color: #191919;
+  background-color: #b7c5d3;
 }
 
 #workspaces button.urgent {
-  background-color: #f38ba8;
+  background-color: #de6e7c;
 }
 
 #memory,
@@ -61,8 +61,8 @@ window#waybar.hidden {
   border-radius: 4px;
   margin: 6px 3px;
   padding: 6px 12px;
-  background-color: #1e1e2e;
-  color: #181825;
+  background-color: #2c2c2c;
+  color: #191919;
 }
 
 #custom-power {
@@ -75,59 +75,58 @@ window#waybar.hidden {
   margin-left: 5px;
   font-size: 15px;
   border-radius: 8px 0px 0px 8px;
-  color: #1793d1;
+  color: #819b69;
 }
 
 #memory {
-  background-color: #fab387;
+  background-color: #d68c67;
 }
 
 #battery {
-  background-color: #f38ba8;
+  background-color: #de6e7c;
 }
 
 #battery.warning,
 #battery.critical,
 #battery.urgent {
-  background-color: #ff0000;
-  color: #FFFF00;
+  background-color: #de6e7c;
+  color: #f6f6f6;
 }
 
 #battery.charging {
-  background-color: #a6e3a1;
-  color: #181825;
+  background-color: #819b69;
+  color: #191919;
 }
 
 #backlight {
-  background-color: #fab387;
+  background-color: #d68c67;
 }
 
 #wireplumber {
-  background-color: #f9e2af;
+  background-color: #b77e64;
 }
 
 #network {
-  background-color: #94e2d5;
+  background-color: #6099c0;
   padding-right: 17px;
 }
 
 #clock {
   font-family: JetBrainsMono Nerd Font;
-  background-color: #cba6f7;
+  background-color: #8e6f98;
 }
 
 #custom-power {
-  background-color: #f2cdcd;
+  background-color: #b279a7;
 }
-
 
 tooltip {
   border-radius: 8px;
   padding: 15px;
-  background-color: #131822;
+  background-color: #0d1117;
 }
 
 tooltip label {
   padding: 5px;
-  background-color: #131822;
+  background-color: #0d1117;
 }

@@ -1,3 +1,4 @@
+{ config, pkgs, ... }:
 { config, pkgs, ... }: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -13,10 +14,10 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
-
     pkgs.google-chrome
     pkgs.hello
     pkgs.waybar
+    pkgs.zathura
     pkgs.jujutsu
     pkgs.niri
     pkgs.swaybg
@@ -57,6 +58,65 @@
       exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
       exec systemctl --user import-environment
     '';
+  };
+
+  programs.zathura = {
+    enable = true;
+    options = {
+      font = "JetBrainsMono Nerd Font 11";
+      window-title-basename = true;
+      selection-clipboard = "clipboard";
+      adjust-open = "best-fit";
+      pages-per-row = 1;
+      scroll-page-aware = true;
+      scroll-full-overlap = 1.0e-2; # Fixed decimal format
+      scroll-step = 50;
+      zoom-min = 10;
+      guioptions = "none";
+
+      # Zenbones Dark Colors
+      notification-error-bg = "#191919";
+      notification-error-fg = "#de6e7c";
+      notification-warning-bg = "#191919";
+      notification-warning-fg = "#d68c67";
+      notification-bg = "#191919";
+      notification-fg = "#b7c5d3";
+
+      completion-bg = "#2c2c2c";
+      completion-fg = "#b7c5d3";
+      completion-group-bg = "#191919";
+      completion-group-fg = "#819b69";
+      completion-highlight-bg = "#6099c0";
+      completion-highlight-fg = "#191919";
+
+      index-bg = "#191919";
+      index-fg = "#b7c5d3";
+      index-active-bg = "#6099c0";
+      index-active-fg = "#191919";
+
+      inputbar-bg = "#2c2c2c";
+      inputbar-fg = "#b7c5d3";
+
+      statusbar-bg = "#2c2c2c";
+      statusbar-fg = "#b7c5d3";
+
+      highlight-color = "#d68c67";
+      highlight-active-color = "#819b69";
+
+      default-bg = "#191919";
+      default-fg = "#b7c5d3";
+      render-loading = true;
+      render-loading-bg = "#191919";
+      render-loading-fg = "#b7c5d3";
+
+      recolor-lightcolor = "#191919";
+      recolor-darkcolor = "#b7c5d3";
+      recolor = true;
+      recolor-keephue = true;
+      recolor-reverse-video = true;
+
+      smooth-scroll = true;
+    };
   };
 
   # Waybar configuration - SIMPLIFIED VERSION

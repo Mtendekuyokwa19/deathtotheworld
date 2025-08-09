@@ -88,6 +88,7 @@
   # Install firefox.
   programs.firefox.enable = true;
   programs.niri.enable = true;
+  programs.zathura.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;

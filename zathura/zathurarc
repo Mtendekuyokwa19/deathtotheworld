@@ -1,0 +1,73 @@
+# Zathura configuration with Zenbones Dark colorscheme
+
+# Font
+set font "JetBrainsMono Nerd Font 11"
+
+# Window and page settings
+set window-title-basename true
+set selection-clipboard clipboard
+set adjust-open "best-fit"
+set pages-per-row 1
+set scroll-page-aware true
+set scroll-full-overlap 0.01
+set scroll-step 50
+set zoom-min 10
+set guioptions none
+map i :set recolor
+# Zenbones Dark colorscheme
+set notification-error-bg "#191919"
+set notification-error-fg "#de6e7c"
+set notification-warning-bg "#191919"
+set notification-warning-fg "#d68c67"
+set notification-bg "#191919"
+set notification-fg "#b7c5d3"
+
+set completion-bg "#2c2c2c"
+set completion-fg "#b7c5d3"
+set completion-group-bg "#191919"
+set completion-group-fg "#819b69"
+set completion-highlight-bg "#6099c0"
+set completion-highlight-fg "#191919"
+
+set index-bg "#191919"
+set index-fg "#b7c5d3"
+set index-active-bg "#6099c0"
+set index-active-fg "#191919"
+
+set inputbar-bg "#2c2c2c"
+set inputbar-fg "#b7c5d3"
+
+set statusbar-bg "#2c2c2c"
+set statusbar-fg "#b7c5d3"
+
+set highlight-color "#d68c67"
+set highlight-active-color "#819b69"
+
+set default-bg "#191919"
+set default-fg "#b7c5d3"
+set render-loading true
+set render-loading-bg "#191919"
+set render-loading-fg "#b7c5d3"
+
+# Recoloring (for PDFs)
+set recolor-lightcolor "#191919"
+set recolor-darkcolor "#b7c5d3"
+set recolor true
+set recolor-keephue true
+set recolor-reverse-video true
+
+# Key mappings
+map u scroll half-up
+map d scroll half-down
+map D toggle_page_mode
+map r reload
+map R rotate
+map K zoom in
+map J zoom out
+map i recolor
+map p print
+map g goto top
+map G goto bottom
+
+# Smooth scrolling
+set smooth-scroll true
