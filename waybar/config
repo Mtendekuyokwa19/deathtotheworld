@@ -30,7 +30,7 @@
         "on-click": "activate",
         "format": "{icon}",
         "format-icons": {
-            "default": "",
+            "default": "󱄅",
             "1": "1",
             "2": "2",
             "3": "3",
@@ -92,7 +92,7 @@
         "scroll-step": 1
     },
     "custom/logo": {
-        "format": "  ",
+        "format": "",
         "tooltip": false,
         "on-click": "~/.config/rofi/launchers/misc/launcher.sh &"
     },

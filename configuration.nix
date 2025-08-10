@@ -95,6 +95,7 @@
   # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
     vim
+    godot
     wget
     swaybg
     swww
@@ -103,6 +104,7 @@
     rustc
     fuzzel
     cargo
+    jdk
     brightnessctl
     gcc
     zathura

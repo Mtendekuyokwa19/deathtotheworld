@@ -18,6 +18,12 @@
       ll = "ls -l";
       ".." = "cd ..";
     };
+    initExtra = ''
+      jjtrace() {
+        export JJ_TRACE=/home/mtende/jjtrace/jj-$(date +"%Y-%m-%dT%H:%M:%S%z").json
+        exec jj "$@"
+      }
+    '';
   };
 
 }

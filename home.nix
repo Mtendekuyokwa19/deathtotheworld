@@ -46,7 +46,6 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-  programs.python3.enable = true;
 
   # Sway configuration - FIXED VERSION
   wayland.windowManager.sway = {
@@ -119,7 +118,7 @@
       smooth-scroll = true;
     };
   };
-
+  services.swww.enable = true;
   # Waybar configuration - SIMPLIFIED VERSION
   programs.waybar = {
     enable = true;
