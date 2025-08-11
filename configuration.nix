@@ -96,10 +96,12 @@
   environment.systemPackages = with pkgs; [
     vim
     godot
+    exiftool
     wget
     swaybg
     swww
     neovim
+    ffmpeg-full
     home-manager
     rustc
     fuzzel
@@ -153,6 +155,10 @@
     };
   };
 
+  swapDevices = [{
+    device = "/swapfile";
+    size = 8192;
+  }];
   # Ensure dbus is properly configured
   services.dbus.enable = true;
 
