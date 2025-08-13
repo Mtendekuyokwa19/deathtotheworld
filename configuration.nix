@@ -114,6 +114,7 @@
     kitty
     lua
     unzip
+    go
     nodejs_22
     git
     xfce.thunar
