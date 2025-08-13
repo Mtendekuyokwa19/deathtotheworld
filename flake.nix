@@ -6,9 +6,11 @@
       "nixpkgs/nixos-25.05"; # Specify the Nixpkgs input from a specific channel
     home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    # jj.url="github:martinvo"
+    jj.url = "github:jj-vcs/jj";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }:
+  outputs = { self, nixpkgs, jj, home-manager, ... }:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
@@ -20,7 +22,11 @@
 
           modules = [
             ./configuration.nix
-
+            {
+              nixpkgs.overlays = [
+                (final: prev: { jujutsu = jj.packages.${prev.system}.default; })
+              ];
+            }
             { nixpkgs.config.allowUnfree = true; }
           ]; # Points to your system's config file
         };
