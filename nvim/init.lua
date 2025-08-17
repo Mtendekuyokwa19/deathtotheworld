@@ -1278,6 +1278,12 @@ require('render-markdown').setup {
 -- Enhanced LSP configuration for HTM files with JavaScript support
 local servers = {
   -- TypeScript/JavaScript Language Server
+tinymist={
+		filetypes={
+			'typ',
+			'typst'
+		}
+	}
   ts_ls = {
     filetypes = {
       'javascript',
