@@ -64,7 +64,7 @@
   users.users.mtende = {
     isNormalUser = true;
     description = "Mtende";
-    shell = pkgs.zsh;
+    shell = pkgs.nushell;
     extraGroups = [ "networkmanager" "wheel" ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMc6CqhLnw+gZs3/tW0Rb5wCnu3UllyJ4OZ5qUuxunAw mtendekuyokwa19@gmail.com"
@@ -72,9 +72,7 @@
     packages = with pkgs; [ kdePackages.kate ];
   };
 
-  # Set default shell and enable zsh
-  users.defaultUserShell = pkgs.zsh;
-  programs.zsh.enable = true;
+  users.defaultUserShell = pkgs.nushell;
 
   services.openssh = {
     enable = true;
@@ -97,6 +95,7 @@
   environment.systemPackages = with pkgs; [
     vim
     godot
+    nushell
     exiftool
     wget
     swaybg
@@ -111,6 +110,8 @@
     jdk
     brightnessctl
     gcc
+    fzf
+    typst
     zathura
     python3
     kitty
@@ -124,13 +125,11 @@
     ripgrep
     waybar
     sway
-
     niri
     google-chrome
     neofetch
     rustup
     curl
-    zsh
     postman
     chromium
     zellij

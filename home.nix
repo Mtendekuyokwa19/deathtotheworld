@@ -1,4 +1,5 @@
 { config, pkgs, ... }: {
+
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "mtende";
@@ -24,7 +25,7 @@
     pkgs.swww
     pkgs.brightnessctl
     pkgs.kitty
-    pkgs.oh-my-zsh
+    pkgs.nushell
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
