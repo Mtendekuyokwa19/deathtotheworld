@@ -113,6 +113,8 @@
     fzf
     typst
     zathura
+    spotify
+
     python3
     pandoc
     kitty
