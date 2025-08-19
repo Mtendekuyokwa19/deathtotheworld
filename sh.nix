@@ -7,6 +7,5 @@
     };
     themeFile = "zenbones_dark";
   };
-  programs.nushell = { enable = true; };
 
 }

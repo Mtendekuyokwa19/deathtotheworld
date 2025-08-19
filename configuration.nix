@@ -64,7 +64,7 @@
   users.users.mtende = {
     isNormalUser = true;
     description = "Mtende";
-    shell = pkgs.nushell;
+    shell = pkgs.bash;
     extraGroups = [ "networkmanager" "wheel" ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMc6CqhLnw+gZs3/tW0Rb5wCnu3UllyJ4OZ5qUuxunAw mtendekuyokwa19@gmail.com"
@@ -72,7 +72,7 @@
     packages = with pkgs; [ kdePackages.kate ];
   };
 
-  users.defaultUserShell = pkgs.nushell;
+  users.defaultUserShell = pkgs.bash;
 
   services.openssh = {
     enable = true;
