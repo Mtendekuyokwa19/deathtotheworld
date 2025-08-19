@@ -114,6 +114,7 @@
     typst
     zathura
     python3
+    pandoc
     kitty
     lua
     unzip
