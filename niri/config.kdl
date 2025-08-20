@@ -65,7 +65,7 @@ spawn-at-startup "vesktop" "--ozone-platform-hint=auto"
 spawn-at-startup "/usr/lib/polkit-kde-authentication-agent-1"
 spawn-at-startup "mpvpaper" "-vp" "-o" "no-audio loop" "HDMI-A-1" "/drvD/Profile/Videos/Hidamari/cat-in-the-swamp-moewalls-com-1080p.mp4"
 spawn-at-startup "swww-daemon"
-spawn-at-startup "swww" "img" "~/Desktop/wallpaper.png" "--transition-type" "fade"
+spawn-at-startup "swww" "img" "../wallpaper.png" "--transition-type" "fade"
 
 prefer-no-csd
 
