@@ -94,6 +94,7 @@
   # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
     vim
+    ollama
     godot
     nushell
     exiftool
@@ -166,6 +167,11 @@
   }];
   # Ensure dbus is properly configured
   services.dbus.enable = true;
+  services.ollama = {
+    enable = true;
+    # Optional: preload models, see https://ollama.com/library
+    loadModels = [ "gemma2:2b" ];
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
