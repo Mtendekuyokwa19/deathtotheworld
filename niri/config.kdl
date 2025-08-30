@@ -60,40 +60,15 @@ layout {
     }
 }
 
-spawn-at-startup "materialgram"
-spawn-at-startup "vesktop" "--ozone-platform-hint=auto"
 spawn-at-startup "/usr/lib/polkit-kde-authentication-agent-1"
 spawn-at-startup "mpvpaper" "-vp" "-o" "no-audio loop" "HDMI-A-1" "/drvD/Profile/Videos/Hidamari/cat-in-the-swamp-moewalls-com-1080p.mp4"
 spawn-at-startup "swww-daemon"
-spawn-at-startup "swww" "img" "~/.dotfiles/wallpaper.png" "--transition-type" "fade"
+spawn-at-startup "swww" "img" "~/Desktop/wallpaper.png" "--transition-type" "fade"
 
 prefer-no-csd
 
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
-animations {
-    window-close {
-        duration-ms 200
-        curve "linear"
-        custom-shader r"
-            vec4 close_color(vec3 coords_geo, vec3 size_geo) {
-                float progress = niri_clamped_progress * niri_clamped_progress;
-                vec2 coords = (coords_geo.xy - vec2(0.5, 1.0)) * size_geo.xy;
-                coords.y -= progress * 200.0;
-                float random = (niri_random_seed - 0.5) / 2.0;
-                random = sign(random) - random;
-                float max_angle = 0.05 * random;
-                float angle = progress * max_angle;
-                mat2 rotate = mat2(cos(angle), -sin(angle), sin(angle), cos(angle));
-                coords = rotate * coords;
-                coords_geo = vec3(coords / size_geo.xy + vec2(0.5, 1.0), 1.0);
-                vec3 coords_tex = niri_geo_to_tex * coords_geo;
-                vec4 color = texture2D(niri_tex, coords_tex.st);
-                return color * (1.0 - niri_clamped_progress);
-            }
-        "
-    }
-}
 
 window-rule {
     min-height 400
@@ -278,8 +253,6 @@ binds {
     Mod+Shift+S { screenshot; }
     Ctrl+Print { screenshot-screen; }
     Alt+Print { screenshot-window; }
-    Mod+Shift+R { spawn "fish" "-c" "wl-screenrec -f ~/Videos/Screenrecs/screenrec-$(math 1 + $(ls ~/Videos/Screenrecs/ | count)).mp4 -g $(slurp -d -F \"Mononoki Nerd Font Mono\" -c \"#8bf6d4\") -b 3MB --audio --audio-device alsa_output.pci-0000_08_00.3.analog-stereo.monitor"; }
-    Mod+Shift+Ctrl+R { spawn "fish" "-c" "killall wl-screenrec && notify-send \"wl-screenrec\" \"Finished recording.\""; }
 
     Mod+Shift+E { quit; }
 
@@ -295,8 +268,6 @@ binds {
     Mod+Ctrl+F5   allow-when-locked=true { spawn "brightnessctl" "set" "1"; }
     Mod+Ctrl+F6   allow-when-locked=true { spawn "brightnessctl" "set" "100%"; }
 
-    Mod+W { spawn "fish" "-c" "swww img ~/Desktop/wallpaper.png --transition-type fade"; }
-    Mod+Shift+W { spawn "fish" "-c" "find ~/Pictures/Wallpapers -type f \\( -iname '*.jpg' -o -iname '*.png' -o -iname '*.jpeg' \\) | shuf -n 1 | xargs swww img --transition-type fade"; }
 
     Mod+Shift+P { power-off-monitors; }
 }

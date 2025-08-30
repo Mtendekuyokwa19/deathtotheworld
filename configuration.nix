@@ -1,8 +1,3 @@
-# Edit this configuration file to define what should be installed on
-
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running 'nixos-help').
-
 { config, pkgs, ... }:
 
 {
@@ -22,32 +17,25 @@
   boot.loader.grub.useOSProber = true;
 
   networking.hostName = "deathtotheworld"; # Define your hostname.
-  # Enable networking
   networking.networkmanager.enable = true;
 
-  # Set your time zone.
   time.timeZone = "Africa/Blantyre";
 
-  # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
-  # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
 
-  # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
     variant = "";
   };
 
-  # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # Enable sound with pipewire.
+  # --- AUDIO CONFIG ---
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -55,17 +43,18 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    jack.enable = true;
+    wireplumber.enable = true;
   };
+  # -------------------
 
-  # Enable experimental features
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  # Define a user account. Don't forget to set a password with 'passwd'.
   users.users.mtende = {
     isNormalUser = true;
     description = "Mtende";
     shell = pkgs.bash;
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "audio" ]; # added "audio"
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMc6CqhLnw+gZs3/tW0Rb5wCnu3UllyJ4OZ5qUuxunAw mtendekuyokwa19@gmail.com"
     ];
@@ -84,18 +73,16 @@
     openFirewall = true;
   };
 
-  # Install firefox.
   programs.firefox.enable = true;
   programs.niri.enable = true;
 
   networking.firewall.enable = false;
-  # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
     vim
     ollama
+    go
     godot
     nushell
     exiftool
@@ -139,15 +126,14 @@
     postman
     chromium
     zellij
-    grim # screenshot functionality
-    slurp # screenshot functionality
-    wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
+    grim
+    slurp
+    wl-clipboard
     mako
   ];
   programs.light.enable = true;
   environment.variables.EDITOR = "vim";
 
-  # Enable XDG desktop portals - SIMPLIFIED VERSION (WLR only)
   xdg.portal = {
     enable = true;
     wlr.enable = true;
@@ -167,15 +153,10 @@
     enable = true;
     ensureDatabases = [ "mydatabase" ];
     enableTCPIP = true;
-    # port = 5432;
     authentication = pkgs.lib.mkOverride 10 ''
-      #...
-      #type database DBuser origin-address auth-method
       local all       all     trust
-      # ipv4
-      host  all      all     127.0.0.1/32   trust
-      # ipv6
-      host all       all     ::1/128        trust
+      host  all       all     127.0.0.1/32   trust
+      host  all       all     ::1/128        trust
     '';
     initialScript = pkgs.writeText "backend-initScript" ''
       CREATE ROLE nixcloud WITH LOGIN PASSWORD 'nixcloud' CREATEDB;
@@ -183,21 +164,18 @@
       GRANT ALL PRIVILEGES ON DATABASE nixcloud TO nixcloud;
     '';
   };
+
   swapDevices = [{
     device = "/swapfile";
     size = 8192;
   }];
-  # Ensure dbus is properly configured
+
   services.dbus.enable = true;
   services.ollama = {
     enable = true;
-    # Optional: preload models, see https://ollama.com/library
     loadModels = [ "gemma2:2b" ];
   };
 
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It's perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  system.stateVersion = "25.05"; # Did you read the comment?
+  system.stateVersion = "25.05";
 }
+
