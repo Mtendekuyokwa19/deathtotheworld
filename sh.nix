@@ -5,7 +5,7 @@
       name = "Maple Mono";
       size = 11;
     };
-    themeFile = "zenbones_dark";
+    themeFile = "Kanagawa_dragon";
   };
 
 }
