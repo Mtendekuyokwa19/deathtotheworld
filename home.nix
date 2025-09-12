@@ -26,6 +26,7 @@
     pkgs.brightnessctl
     pkgs.kitty
     pkgs.nushell
+    pkgs.zsh
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -47,6 +48,7 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+  programs.zsh.enable = true;
 
   # Sway configuration - FIXED VERSION
   wayland.windowManager.sway = {
@@ -60,7 +62,13 @@
       exec systemctl --user import-environment
     '';
   };
-
+  programs.zsh = {
+    oh-my-zsh = { # "ohMyZsh" without Home Manager
+      enable = true;
+      plugins = [ "git" "thefuck" ];
+      theme = "robbyrussell";
+    };
+  };
   programs.zathura = {
     enable = true;
     options = {
@@ -122,7 +130,7 @@
   services.swww.enable = true;
   # Waybar configuration - SIMPLIFIED VERSION
   programs.waybar = {
-    enable = true;
+    enable = false;
     systemd.enable = true;
     settings = {
       mainBar = {

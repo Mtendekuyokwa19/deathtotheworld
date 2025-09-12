@@ -61,7 +61,7 @@ layout {
 }
 
 spawn-at-startup "/usr/lib/polkit-kde-authentication-agent-1"
-spawn-at-startup "mpvpaper" "-vp" "-o" "no-audio loop" "HDMI-A-1" "/drvD/Profile/Videos/Hidamari/cat-in-the-swamp-moewalls-com-1080p.mp4"
+spawn-at-startup "noctalia-shell"
 spawn-at-startup "swww-daemon"
 spawn-at-startup "swww" "img" "~/Desktop/wallpaper.png" "--transition-type" "fade"
 
@@ -72,8 +72,6 @@ screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 window-rule {
     min-height 400
     min-width 420
-    opacity 0.85
-    hover-opacity 0.95
 }
 
 window-rule {

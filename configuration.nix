@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports = [ # Include the results of the hardware scan.
@@ -53,7 +53,7 @@
   users.users.mtende = {
     isNormalUser = true;
     description = "Mtende";
-    shell = pkgs.bash;
+    shell = pkgs.zsh;
     extraGroups = [ "networkmanager" "wheel" "audio" ]; # added "audio"
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMc6CqhLnw+gZs3/tW0Rb5wCnu3UllyJ4OZ5qUuxunAw mtendekuyokwa19@gmail.com"
@@ -61,7 +61,7 @@
     packages = with pkgs; [ kdePackages.kate ];
   };
 
-  users.defaultUserShell = pkgs.bash;
+  users.defaultUserShell = pkgs.zsh;
 
   services.openssh = {
     enable = true;
@@ -75,6 +75,7 @@
 
   programs.firefox.enable = true;
   programs.niri.enable = true;
+  programs.zsh.enable = true;
 
   networking.firewall.enable = false;
   nixpkgs.config.allowUnfree = true;
@@ -83,10 +84,16 @@
     vim
     ollama
     go
+    # Re-enabled after upstream fix
+    inputs.noctalia.packages.${"x86_64-linux"}.default
+    inputs.quickshell.packages.${
+      "x86_64-linux"
+    }.default # Keep this commented until quickshell is also fixed
     godot
     nushell
     exiftool
     wget
+    zsh
     swaybg
     swww
     openssl
@@ -109,13 +116,11 @@
     typst
     zathura
     spotify
-
     python3
     pandoc
     kitty
     lua
     unzip
-    go
     nodejs
     git
     xfce.thunar
@@ -183,4 +188,3 @@
 
   system.stateVersion = "25.05";
 }
-
