@@ -69,10 +69,11 @@ prefer-no-csd
 
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
-
 window-rule {
     min-height 400
     min-width 420
+    opacity 0.85
+    hover-opacity 0.95
 }
 
 window-rule {
@@ -267,7 +268,6 @@ binds {
 
     Mod+Ctrl+F5   allow-when-locked=true { spawn "brightnessctl" "set" "1"; }
     Mod+Ctrl+F6   allow-when-locked=true { spawn "brightnessctl" "set" "100%"; }
-
 
     Mod+Shift+P { power-off-monitors; }
 }

@@ -89,8 +89,13 @@
     wget
     swaybg
     swww
+    openssl
     neovim
     ffmpeg-full
+    arduino
+    vscode
+    prisma
+    prisma-engines
     ghostty
     postgresql
     home-manager
