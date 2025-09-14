@@ -92,6 +92,7 @@
     godot
     nushell
     exiftool
+    delta
     wget
     zsh
     swaybg
