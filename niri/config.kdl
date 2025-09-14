@@ -62,8 +62,6 @@ layout {
 
 spawn-at-startup "/usr/lib/polkit-kde-authentication-agent-1"
 spawn-at-startup "noctalia-shell"
-spawn-at-startup "swww-daemon"
-spawn-at-startup "swww" "img" "~/Desktop/wallpaper.png" "--transition-type" "fade"
 
 prefer-no-csd
 
