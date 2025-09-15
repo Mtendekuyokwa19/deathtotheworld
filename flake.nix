@@ -18,7 +18,6 @@
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, quickshell, noctalia, ... }:
-  outputs = { self, nixpkgs, jj, home-manager, ... }:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
@@ -31,17 +30,9 @@
         deathtotheworld = lib.nixosSystem {
           inherit system;
           specialArgs = { inherit self inputs lib system; };
-          modules = [ ./configuration.nix ];
 
-          modules = [
-            ./configuration.nix
-            {
-              nixpkgs.overlays = [
-                (final: prev: { jujutsu = jj.packages.${prev.system}.default; })
-              ];
-            }
-            { nixpkgs.config.allowUnfree = true; }
-          ]; # Points to your system's config file
+          modules =
+            [ ./configuration.nix ]; # Points to your system's config file
         };
       };
 
