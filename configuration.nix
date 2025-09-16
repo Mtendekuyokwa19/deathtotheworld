@@ -98,7 +98,6 @@
     swaybg
     swww
     openssl
-    neovim
     ffmpeg-full
     arduino
     vscode
