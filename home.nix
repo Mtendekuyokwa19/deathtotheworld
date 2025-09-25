@@ -2,8 +2,8 @@
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "mtende";
-  home.homeDirectory = "/home/mtende";
+  home.username = "deathtotheworld";
+  home.homeDirectory = "/home/deathtotheworld";
   imports = [ ./links.nix ./sh.nix ];
 
   # This value determines the Home Manager release that your configuration is
@@ -22,6 +22,7 @@
     pkgs.python3
     pkgs.niri
     pkgs.swaybg
+    pkgs.aria2
     pkgs.swww
     pkgs.brightnessctl
     pkgs.kitty
@@ -68,6 +69,10 @@
       plugins = [ "git" "thefuck" ];
       theme = "robbyrussell";
     };
+  };
+
+  programs.neovim = {
+      enable = true;
   };
   programs.zathura = {
     enable = true;

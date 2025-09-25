@@ -8,4 +8,7 @@
     themeFile = "zenbones_dark";
   };
 
+  programs.neovim = {
+    enable = true;
+  };
 }

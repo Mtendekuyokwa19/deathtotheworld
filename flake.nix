@@ -27,7 +27,7 @@
       };
     in {
       nixosConfigurations = {
-        deathtotheworld = lib.nixosSystem {
+        nixos = lib.nixosSystem {
           inherit system;
           specialArgs = { inherit self inputs lib system; };
 
@@ -48,7 +48,7 @@
       };
 
       homeConfigurations = {
-        mtende = home-manager.lib.homeManagerConfiguration {
+        deathtotheworld = home-manager.lib.homeManagerConfiguration {
           pkgs = pkgs;
           extraSpecialArgs = { inherit inputs system; };
           modules = [

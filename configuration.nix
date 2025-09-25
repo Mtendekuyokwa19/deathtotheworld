@@ -11,13 +11,31 @@
     nerd-fonts.jetbrains-mono
   ];
 
-  # Bootloader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda";
-  boot.loader.grub.useOSProber = true;
+  # Bootloader - Fixed for UEFI systems
+  boot.loader = {
+    grub = {
+      enable = true;
+      device = "nodev";  # Changed from "/dev/sda" 
+      efiSupport = true;  # Added for UEFI
+      useOSProber = true;
+    };
+    efi.canTouchEfiVariables = true;  # Added for UEFI
+  };
 
-  networking.hostName = "deathtotheworld"; # Define your hostname.
+  networking.hostName = "nixos"; # Define your hostname.
   networking.networkmanager.enable = true;
+
+  # Enhanced Bluetooth Configuration
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true; # powers up the default Bluetooth controller on boot
+    settings = {
+      General = {
+        Enable = "Source,Sink,Media,Socket";
+      };
+    };
+  };
+  services.blueman.enable = true;
 
   time.timeZone = "Africa/Blantyre";
 
@@ -50,11 +68,11 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  users.users.mtende = {
+  users.users.deathtotheworld = {
     isNormalUser = true;
     description = "Mtende";
     shell = pkgs.zsh;
-    extraGroups = [ "networkmanager" "wheel" "audio" ]; # added "audio"
+    extraGroups = [ "networkmanager" "wheel" "audio" "bluetooth" ]; # added "bluetooth"
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMc6CqhLnw+gZs3/tW0Rb5wCnu3UllyJ4OZ5qUuxunAw mtendekuyokwa19@gmail.com"
     ];
@@ -91,6 +109,7 @@
     }.default # Keep this commented until quickshell is also fixed
     godot
     nushell
+    aria2
     exiftool
     delta
     wget
@@ -107,6 +126,9 @@
     postgresql
     home-manager
     rustc
+    neovim
+    yarn
+    qtspim
     fuzzel
     cargo
     jdk
@@ -129,6 +151,8 @@
     ripgrep
     waybar
     sway
+    sqlite
+    sqlitestudio
     niri
     google-chrome
     neofetch
@@ -141,9 +165,14 @@
     slurp
     wl-clipboard
     mako
+    # Bluetooth packages
+    bluez
+    bluez-tools
   ];
+  
   programs.light.enable = true;
   environment.variables.EDITOR = "vim";
+  
   programs.steam = {
     enable = true;
     remotePlay.openFirewall =
@@ -153,6 +182,7 @@
     localNetworkGameTransfers.openFirewall =
       true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
+  
   xdg.portal = {
     enable = true;
     wlr.enable = true;
