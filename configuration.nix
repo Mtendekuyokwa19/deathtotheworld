@@ -117,6 +117,7 @@
     swaybg
     swww
     openssl
+		ed
     ffmpeg-full
     arduino
     vscode
@@ -138,6 +139,7 @@
     fzf
     typst
     zathura
+
     spotify
     python3
     pandoc
