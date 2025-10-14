@@ -113,6 +113,7 @@
     exiftool
     delta
     wget
+    helix
     zsh
     swaybg
     swww
@@ -150,6 +151,7 @@
     git
     xfce.thunar
     jujutsu
+    ngrok
     ripgrep
     waybar
     sway
