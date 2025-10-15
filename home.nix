@@ -27,6 +27,7 @@
     pkgs.brightnessctl
     pkgs.kitty
     pkgs.nushell
+    pkgs.emacs
     pkgs.zsh
   ];
 
@@ -53,7 +54,6 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-  # programs.zsh.enable = true;
 
   # Sway configuration - FIXED VERSION
   wayland.windowManager.sway = {
