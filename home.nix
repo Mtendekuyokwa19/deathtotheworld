@@ -35,7 +35,11 @@
   home.file = {
     # You can add dotfiles here if needed
   };
-
+  programs.emacs = {
+  enable=true;
+    package =
+      pkgs.emacs-pgtk; # replace with pkgs.emacs-gtk, or a version provided by the community overlay if desired.
+  };
   # Session variables - FIXED VERSION
   home.sessionVariables = {
     XDG_SESSION_TYPE = "wayland";
@@ -49,7 +53,7 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-  programs.zsh.enable = true;
+  # programs.zsh.enable = true;
 
   # Sway configuration - FIXED VERSION
   wayland.windowManager.sway = {
@@ -63,17 +67,8 @@
       exec systemctl --user import-environment
     '';
   };
-  programs.zsh = {
-    oh-my-zsh = { # "ohMyZsh" without Home Manager
-      enable = true;
-      plugins = [ "git" "thefuck" ];
-      theme = "robbyrussell";
-    };
-  };
 
-  programs.neovim = {
-      enable = true;
-  };
+  programs.neovim = { enable = true; };
   programs.zathura = {
     enable = true;
     options = {
