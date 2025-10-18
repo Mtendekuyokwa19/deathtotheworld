@@ -871,5 +871,5 @@ pcall(function()
     completions = { lsp = { enabled = true } },
   }
 end)
-
+vim.cmd("colorscheme kanagawa-dragon")
 -- vim: ts=2 sts=2 sw=2 et
