@@ -27,7 +27,6 @@
     pkgs.brightnessctl
     pkgs.kitty
     pkgs.nushell
-    pkgs.emacs
     pkgs.zsh
   ];
 
@@ -35,11 +34,6 @@
   # plain files is through 'home.file'.
   home.file = {
     # You can add dotfiles here if needed
-  };
-  programs.emacs = {
-  enable=true;
-    package =
-      pkgs.emacs-pgtk; # replace with pkgs.emacs-gtk, or a version provided by the community overlay if desired.
   };
   # Session variables - FIXED VERSION
   home.sessionVariables = {
