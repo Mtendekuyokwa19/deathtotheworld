@@ -124,6 +124,7 @@
     ghostty
     postgresql
     home-manager
+    obsidian
     rustc
     neovim
     yarn
