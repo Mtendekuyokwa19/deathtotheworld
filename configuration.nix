@@ -46,7 +46,7 @@
     layout = "us";
     variant = "";
   };
-
+  programs.adb.enable = true;
   services.printing.enable = true;
 
   # --- AUDIO CONFIG ---
@@ -65,11 +65,17 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   users.users.deathtotheworld = {
+
     isNormalUser = true;
     description = "Mtende";
     shell = pkgs.zsh;
-    extraGroups =
-      [ "networkmanager" "wheel" "audio" "bluetooth" ]; # added "bluetooth"
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "audio"
+      "bluetooth"
+      "adbusers"
+    ]; # added "bluetooth"
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMc6CqhLnw+gZs3/tW0Rb5wCnu3UllyJ4OZ5qUuxunAw mtendekuyokwa19@gmail.com"
     ];
@@ -110,6 +116,7 @@
     exiftool
     delta
     wget
+
     helix
     zsh
     swaybg
@@ -120,6 +127,13 @@
     arduino
     vscode
     prisma
+    cmake
+    android-studio
+    ninja
+    pkg-config
+    gtk3
+    libsecret
+    jsoncpp
     prisma-engines
     ghostty
     postgresql
@@ -227,4 +241,5 @@
   };
 
   system.stateVersion = "25.05";
+
 }

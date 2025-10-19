@@ -37,7 +37,7 @@
       };
 
       devShells.x86_64-linux.default = pkgs.mkShell {
-        buildInputs = with pkgs; [ prisma-engines prisma ];
+        buildInputs = with pkgs; [ prisma-engines prisma libsecret pkg-config ];
         shellHook = ''
           export PKG_CONFIG_PATH="${pkgs.openssl.dev}/lib/pkgconfig";
           export PRISMA_SCHEMA_ENGINE_BINARY="${pkgs.prisma-engines}/bin/schema-engine"

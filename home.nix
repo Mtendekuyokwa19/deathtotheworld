@@ -13,11 +13,20 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
+
+  home.sessionVariables = {
+    PKG_CONFIG_PATH =
+      "${pkgs.libsecret.dev}/lib/pkgconfig:${pkgs.glib.dev}/lib/pkgconfig";
+  };
   home.packages = [
     pkgs.google-chrome
     pkgs.hello
     pkgs.waybar
     pkgs.zathura
+    pkgs.pkg-config
+    pkgs.libsecret.dev
+    pkgs.glib.dev # needed for glib-2.0.pc
+    pkgs.gnome-keyring
     pkgs.jujutsu
     pkgs.python3
     pkgs.niri
@@ -35,7 +44,6 @@
   home.file = {
     # You can add dotfiles here if needed
   };
-
   # Session variables - FIXED VERSION
   home.sessionVariables = {
     XDG_SESSION_TYPE = "wayland";
@@ -49,7 +57,6 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-  programs.zsh.enable = true;
 
   # Sway configuration - FIXED VERSION
   wayland.windowManager.sway = {
@@ -63,17 +70,8 @@
       exec systemctl --user import-environment
     '';
   };
-  programs.zsh = {
-    oh-my-zsh = { # "ohMyZsh" without Home Manager
-      enable = true;
-      plugins = [ "git" "thefuck" ];
-      theme = "robbyrussell";
-    };
-  };
 
-  programs.neovim = {
-      enable = true;
-  };
+  programs.neovim = { enable = true; };
   programs.zathura = {
     enable = true;
     options = {
