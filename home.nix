@@ -21,6 +21,7 @@
     pkgs.jujutsu
     pkgs.python3
     pkgs.niri
+    pkgs.calibre
     pkgs.swaybg
     pkgs.aria2
     pkgs.swww
@@ -71,9 +72,7 @@
     };
   };
 
-  programs.neovim = {
-      enable = true;
-  };
+  programs.neovim = { enable = true; };
   programs.zathura = {
     enable = true;
     options = {
