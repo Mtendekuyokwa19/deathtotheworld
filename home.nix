@@ -24,6 +24,7 @@
     pkgs.calibre
     pkgs.swaybg
     pkgs.aria2
+    pkgs.dart
     pkgs.swww
     pkgs.brightnessctl
     pkgs.kitty
