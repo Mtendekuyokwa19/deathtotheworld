@@ -26,6 +26,7 @@
     pkgs.aria2
     pkgs.dart
     pkgs.swww
+    pkgs.zed-editor
     pkgs.brightnessctl
     pkgs.kitty
     pkgs.nushell
