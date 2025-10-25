@@ -22,9 +22,10 @@
     pkgs.python3
     pkgs.niri
     pkgs.calibre
+    pkgs.flutter
     pkgs.swaybg
     pkgs.aria2
-    pkgs.dart
+    pkgs.unityhub
     pkgs.swww
     pkgs.zed-editor
     pkgs.brightnessctl
