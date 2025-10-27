@@ -124,8 +124,11 @@
     ffmpeg-full
     arduino
     vscode
+    feh
     genymotion
     prisma
+    i3
+    dmenu
     prisma-engines
     ghostty
     postgresql
