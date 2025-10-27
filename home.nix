@@ -29,6 +29,7 @@
     pkgs.swww
     pkgs.zed-editor
     pkgs.brightnessctl
+    pkgs.wlsunset
     pkgs.kitty
     pkgs.nushell
     pkgs.zsh

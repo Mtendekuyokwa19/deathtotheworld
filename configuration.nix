@@ -24,7 +24,7 @@
 
   networking.hostName = "nixos"; # Define your hostname.
   networking.networkmanager.enable = true;
-
+  nixpkgs.config.android_sdk.accept_license = true;
   # Enhanced Bluetooth Configuration
   hardware.bluetooth = {
     enable = true;
@@ -47,6 +47,8 @@
     variant = "";
   };
 
+  programs.adb.enable = true;
+  programs.nix-ld.enable = true;
   services.printing.enable = true;
 
   # --- AUDIO CONFIG ---
@@ -109,8 +111,11 @@
     aria2
     exiftool
     delta
+    android-studio
+    android-tools
     wget
     helix
+    openjdk
     zsh
     swaybg
     swww
