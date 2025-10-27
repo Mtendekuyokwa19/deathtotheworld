@@ -124,6 +124,7 @@
     ffmpeg-full
     arduino
     vscode
+    genymotion
     prisma
     prisma-engines
     ghostty
