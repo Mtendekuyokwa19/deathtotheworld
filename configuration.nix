@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
   ];
 
+  boot.kernelModules = [ "kvm-intel" ];
   fonts.packages = with pkgs; [
     nerd-fonts.fira-code
     nerd-fonts.hack
@@ -70,8 +71,14 @@
     isNormalUser = true;
     description = "Mtende";
     shell = pkgs.zsh;
-    extraGroups =
-      [ "networkmanager" "wheel" "audio" "bluetooth" ]; # added "bluetooth"
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "audio"
+      "bluetooth"
+      "libvirtd"
+      "kvm"
+    ]; # added "bluetooth"
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMc6CqhLnw+gZs3/tW0Rb5wCnu3UllyJ4OZ5qUuxunAw mtendekuyokwa19@gmail.com"
     ];
@@ -112,6 +119,7 @@
     exiftool
     delta
     android-studio
+    yazi
     android-tools
     wget
     helix
@@ -235,6 +243,13 @@
     enable = true;
     loadModels = [ "gemma2:2b" ];
   };
-
   system.stateVersion = "25.05";
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu = {
+      package = pkgs.qemu_kvm;
+      ovmf.enable = true;
+    };
+  };
+
 }

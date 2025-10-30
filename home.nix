@@ -1,4 +1,11 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+
+let
+  unstableTarball = fetchTarball {
+    url = "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
+  };
+  unstable = import unstableTarball { config = config.nixpkgs.config; };
+in {
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -27,7 +34,8 @@
     pkgs.aria2
     pkgs.unityhub
     pkgs.swww
-    pkgs.zed-editor
+    pkgs.globalprotect-openconnect
+    unstable.zed-editor # Changed to unstable version
     pkgs.brightnessctl
     pkgs.wlsunset
     pkgs.kitty
