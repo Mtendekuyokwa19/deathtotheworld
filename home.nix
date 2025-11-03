@@ -28,6 +28,7 @@ in {
     unstable.jujutsu
     pkgs.python3
     pkgs.niri
+    unstable.fzf
     pkgs.calibre
     pkgs.flutter
     pkgs.swaybg

@@ -152,7 +152,6 @@
     brightnessctl
     gcc
     steam
-    fzf
     typst
     zathura
 
