@@ -25,7 +25,7 @@ in {
     pkgs.hello
     pkgs.waybar
     pkgs.zathura
-    pkgs.jujutsu
+    unstable.jujutsu
     pkgs.python3
     pkgs.niri
     pkgs.calibre
