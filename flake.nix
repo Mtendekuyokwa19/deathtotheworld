@@ -39,11 +39,24 @@
       devShells.x86_64-linux.default = pkgs.mkShell {
         buildInputs = with pkgs; [ prisma-engines prisma libsecret pkg-config ];
         shellHook = ''
-          export PKG_CONFIG_PATH="${pkgs.openssl.dev}/lib/pkgconfig";
-          export PRISMA_SCHEMA_ENGINE_BINARY="${pkgs.prisma-engines}/bin/schema-engine"
-          export PRISMA_QUERY_ENGINE_BINARY="${pkgs.prisma-engines}/bin/query-engine"
-          export PRISMA_QUERY_ENGINE_LIBRARY="${pkgs.prisma-engines}/lib/libquery_engine.node"
-          export PRISMA_FMT_BINARY="${pkgs.prisma-engines}/bin/prisma-fmt"
+                   export PKG_CONFIG_PATH="${pkgs.openssl.dev}/lib/pkgconfig";
+                   export PRISMA_SCHEMA_ENGINE_BINARY="${pkgs.prisma-engines}/bin/schema-engine"
+                   export PRISMA_QUERY_ENGINE_BINARY="${pkgs.prisma-engines}/bin/query-engine"
+                   export PRISMA_QUERY_ENGINE_LIBRARY="${pkgs.prisma-engines}/lib/libquery_engine.node"
+                   export PRISMA_FMT_BINARY="${pkgs.prisma-engines}/bin/prisma-fmt"
+          export WAYLAND_DISPLAY="''${WAYLAND_DISPLAY:-wayland-1}"
+                     export XDG_SESSION_TYPE=wayland
+                     export QT_QPA_PLATFORM=wayland
+                     export GDK_BACKEND=wayland
+                     export MOZ_ENABLE_WAYLAND=1
+                     
+                     # XWayland fallback for apps that need it
+                     export DISPLAY="''${DISPLAY:-:0}"
+                     
+                     # Flutter configuration
+                     export CHROME_EXECUTABLE="${pkgs.chromium}/bin/chromium"
+                     export PKG_CONFIG_PATH="${pkgs.libsecret}/lib/pkgconfig:${pkgs.gtk3}/lib/pkgconfig:$PKG_CONFIG_PATH"
+                     export LD_LIBRARY_PATH="${pkgs.libsecret}/lib:${pkgs.gtk3}/lib:$
         '';
       };
 

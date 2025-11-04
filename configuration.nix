@@ -63,7 +63,6 @@
   # -------------------
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
   users.users.deathtotheworld = {
 
     isNormalUser = true;
@@ -72,6 +71,8 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+"kvm"
+"libvirtd"
       "audio"
       "bluetooth"
       "adbusers"
@@ -81,7 +82,7 @@
     ];
     packages = with pkgs; [ kdePackages.kate ];
   };
-
+boot.kernelModules = [ "kvm-intel" ]; 
   users.defaultUserShell = pkgs.zsh;
 
   services.openssh = {
@@ -93,7 +94,6 @@
     };
     openFirewall = true;
   };
-
   programs.firefox.enable = true;
   programs.niri.enable = true;
   programs.zsh.enable = true;
@@ -108,8 +108,6 @@
     # Re-enabled after upstream fix
     inputs.noctalia.packages.${"x86_64-linux"}.default
     inputs.quickshell.packages.${
-      "x86_64-linux"
-    }.default # Keep this commented until quickshell is also fixed
     godot
     nushell
     aria2
@@ -119,6 +117,7 @@
 
     helix
     zsh
+    xwayland
     swaybg
     swww
     openssl
@@ -242,4 +241,5 @@
 
   system.stateVersion = "25.05";
 
+virtualisation.libvirtd.enable = true;
 }
