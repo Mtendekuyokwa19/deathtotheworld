@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
   ];
 
+  boot.kernelModules = [ "kvm-intel" ];
   fonts.packages = with pkgs; [
     nerd-fonts.fira-code
     nerd-fonts.hack
@@ -22,9 +23,14 @@
     efi.canTouchEfiVariables = true; # Added for UEFI
   };
 
+  services.xserver = {
+    layout = "us";
+    xkbOptions = "caps:swapescape";
+  };
+
   networking.hostName = "nixos"; # Define your hostname.
   networking.networkmanager.enable = true;
-
+  nixpkgs.config.android_sdk.accept_license = true;
   # Enhanced Bluetooth Configuration
   hardware.bluetooth = {
     enable = true;
@@ -39,6 +45,8 @@
 
   services.xserver.enable = true;
 
+  services.xserver.windowManager.dwm.enable = true;
+  services.xserver.windowManager.i3.enable = true;
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
 
@@ -47,6 +55,8 @@
     variant = "";
   };
   programs.adb.enable = true;
+
+  programs.nix-ld.enable = true;
   services.printing.enable = true;
 
   # --- AUDIO CONFIG ---
@@ -71,18 +81,16 @@
     extraGroups = [
       "networkmanager"
       "wheel"
-"kvm"
-"libvirtd"
       "audio"
       "bluetooth"
-      "adbusers"
+      "libvirtd"
+      "kvm"
     ]; # added "bluetooth"
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMc6CqhLnw+gZs3/tW0Rb5wCnu3UllyJ4OZ5qUuxunAw mtendekuyokwa19@gmail.com"
     ];
     packages = with pkgs; [ kdePackages.kate ];
   };
-boot.kernelModules = [ "kvm-intel" ]; 
   users.defaultUserShell = pkgs.zsh;
 
   services.openssh = {
@@ -107,15 +115,19 @@ boot.kernelModules = [ "kvm-intel" ];
     go
     # Re-enabled after upstream fix
     inputs.noctalia.packages.${"x86_64-linux"}.default
-    inputs.quickshell.packages.${
     godot
     nushell
     aria2
     exiftool
     delta
+    android-studio
+    yazi
+    android-tools
     wget
 
     helix
+    openjdk
+    i3
     zsh
     xwayland
     swaybg
@@ -125,6 +137,10 @@ boot.kernelModules = [ "kvm-intel" ];
     ffmpeg-full
     arduino
     vscode
+    feh
+    xclip
+    xsel
+    genymotion
     prisma
     cmake
     android-studio
@@ -133,10 +149,13 @@ boot.kernelModules = [ "kvm-intel" ];
     gtk3
     libsecret
     jsoncpp
+    i3
+    dmenu
     prisma-engines
     ghostty
     postgresql
     home-manager
+    obsidian
     rustc
     neovim
     yarn
@@ -147,7 +166,6 @@ boot.kernelModules = [ "kvm-intel" ];
     brightnessctl
     gcc
     steam
-    fzf
     typst
     zathura
 
@@ -238,8 +256,14 @@ boot.kernelModules = [ "kvm-intel" ];
     enable = true;
     loadModels = [ "gemma2:2b" ];
   };
-
   system.stateVersion = "25.05";
 
-virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu = {
+      package = pkgs.qemu_kvm;
+      ovmf.enable = true;
+    };
+  };
+
 }

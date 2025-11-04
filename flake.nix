@@ -20,6 +20,8 @@
   outputs = inputs@{ self, nixpkgs, home-manager, quickshell, noctalia, ... }:
     let
       lib = nixpkgs.lib;
+
+      androidSdk = pkgs.androidenv.androidPkgs.androidsdk;
       system = "x86_64-linux";
       pkgs = import nixpkgs {
         inherit system;
@@ -37,7 +39,18 @@
       };
 
       devShells.x86_64-linux.default = pkgs.mkShell {
-        buildInputs = with pkgs; [ prisma-engines prisma libsecret pkg-config ];
+        buildInputs = with pkgs; [
+          pkgs.flutter
+          androidSdk
+          pkgs.jdk17
+          prisma-engines
+          prisma
+          libsecret
+          pkg-config
+        ];
+        ANDROID_SDK_ROOT = "${androidSdk}/libexec/android-sdk";
+        GRADLE_OPTS =
+          "-Dorg.gradle.project.android.aapt2FromMavenOverride=${androidSdk}/libexec/android-sdk/build-tools/34.0.0/aapt2";
         shellHook = ''
                    export PKG_CONFIG_PATH="${pkgs.openssl.dev}/lib/pkgconfig";
                    export PRISMA_SCHEMA_ENGINE_BINARY="${pkgs.prisma-engines}/bin/schema-engine"
@@ -50,6 +63,7 @@
                      export GDK_BACKEND=wayland
                      export MOZ_ENABLE_WAYLAND=1
                      
+
                      # XWayland fallback for apps that need it
                      export DISPLAY="''${DISPLAY:-:0}"
                      

@@ -1,4 +1,16 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+
+let
+  # Pin to a specific nixpkgs-unstable commit for reproducibility
+  unstableTarball = fetchTarball {
+    url = "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
+    sha256 = "1p015n2jb2sjx15cny60kch4d6k59ff0xrxa51kacrffkswl7y72";
+  };
+  unstable = import unstableTarball {
+    system = pkgs.system;
+    config.allowUnfree = true;
+  };
+in {
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -6,44 +18,42 @@
   home.homeDirectory = "/home/deathtotheworld";
   imports = [ ./links.nix ./sh.nix ];
 
-  # This value determines the Home Manager release that your configuration is
-  # compatible with. This helps avoid breakage when a new Home Manager release
-  # introduces backwards incompatible changes.
-  home.stateVersion = "25.05"; # Please read the comment before changing.
-
-  # The home.packages option allows you to install Nix packages into your
-  # environment.
+  home.stateVersion = "25.05";
 
   home.sessionVariables = {
     PKG_CONFIG_PATH =
       "${pkgs.libsecret.dev}/lib/pkgconfig:${pkgs.glib.dev}/lib/pkgconfig";
   };
-  home.packages = [
-    pkgs.google-chrome
-    pkgs.hello
-    pkgs.waybar
-    pkgs.zathura
-    pkgs.pkg-config
-    pkgs.libsecret.dev
-    pkgs.glib.dev # needed for glib-2.0.pc
-    pkgs.gnome-keyring
-    pkgs.jujutsu
-    pkgs.python3
-    pkgs.niri
-    pkgs.swaybg
-    pkgs.aria2
-    pkgs.swww
-    pkgs.brightnessctl
-    pkgs.kitty
-    pkgs.nushell
-    pkgs.zsh
+
+  home.packages = with pkgs; [
+    google-chrome
+    hello
+    waybar
+    zathura
+    unstable.jujutsu # Using unstable jujutsu
+    python3
+    unzip
+    niri
+    fzf
+    calibre
+    unstable.flutter # Using unstable Flutter
+    unstable.zed-editor # Using unstable Flutter
+    swaybg
+    aria2
+    unityhub
+    swww
+    globalprotect-openconnect
+    brightnessctl
+    wlsunset
+    kitty
+    nushell
+    dwm
+    zsh
   ];
 
-  # Home Manager is pretty good at managing dotfiles. The primary way to manage
-  # plain files is through 'home.file'.
-  home.file = {
-    # You can add dotfiles here if needed
-  };
+  # Rest of your configuration remains the same...
+  home.file = { };
+
   # Session variables - FIXED VERSION
   home.sessionVariables = {
     XDG_SESSION_TYPE = "wayland";
@@ -81,7 +91,7 @@
       adjust-open = "best-fit";
       pages-per-row = 1;
       scroll-page-aware = true;
-      scroll-full-overlap = 1.0e-2; # Fixed decimal format
+      scroll-full-overlap = 1.0e-2;
       scroll-step = 50;
       zoom-min = 10;
       guioptions = "none";
@@ -131,6 +141,7 @@
     };
   };
   services.swww.enable = true;
+
   # Waybar configuration - SIMPLIFIED VERSION
   programs.waybar = {
     enable = false;
