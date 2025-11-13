@@ -9,7 +9,7 @@
             cursor_trail 3
       cursor_trail_decay 0.1 0.4
     '';
-    themeFile = "zenbones_dark";
+    themeFile = "nord";
   };
 
   programs.neovim = { enable = true; };

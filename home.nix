@@ -28,6 +28,8 @@ in {
   home.packages = with pkgs; [
     google-chrome
     hello
+   prisma-engines
+        prisma
     waybar
     zathura
     unstable.jujutsu # Using unstable jujutsu

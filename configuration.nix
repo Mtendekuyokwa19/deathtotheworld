@@ -27,7 +27,7 @@
     layout = "us";
     xkbOptions = "caps:swapescape";
   };
-
+services.timesyncd.enable = true; 
   networking.hostName = "nixos"; # Define your hostname.
   networking.networkmanager.enable = true;
   nixpkgs.config.android_sdk.accept_license = true;
@@ -112,6 +112,7 @@
   environment.systemPackages = with pkgs; [
     vim
     ollama
+    firebase-tools
     go
     # Re-enabled after upstream fix
     inputs.noctalia.packages.${"x86_64-linux"}.default
@@ -124,7 +125,7 @@
     yazi
     android-tools
     wget
-
+fzf
     helix
     openjdk
     i3
@@ -149,6 +150,7 @@
     gtk3
     libsecret
     jsoncpp
+    zoxide
     i3
     dmenu
     prisma-engines
@@ -175,7 +177,6 @@
     kitty
     lua
     unzip
-    nodejs
     git
     xfce.thunar
     jujutsu
