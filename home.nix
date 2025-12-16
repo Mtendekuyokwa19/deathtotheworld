@@ -1,15 +1,7 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 let
-  # Pin to a specific nixpkgs-unstable commit for reproducibility
-  unstableTarball = fetchTarball {
-    url = "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
-    sha256 = "1p015n2jb2sjx15cny60kch4d6k59ff0xrxa51kacrffkswl7y72";
-  };
-  unstable = import unstableTarball {
-    system = pkgs.system;
-    config.allowUnfree = true;
-  };
+  unstable = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system};
 in {
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -23,16 +15,23 @@ in {
   home.sessionVariables = {
     PKG_CONFIG_PATH =
       "${pkgs.libsecret.dev}/lib/pkgconfig:${pkgs.glib.dev}/lib/pkgconfig";
+    # Prisma engine paths for NixOS compatibility
+    PRISMA_ENGINES_CHECKSUM_IGNORE_MISSING = "1";
+    PRISMA_QUERY_ENGINE_LIBRARY = "/nix/store/w6lhwd7ailwb2fgibm250cqk8z88ylsn-prisma-engines-6.18.0/lib/libquery_engine.node";
+    PRISMA_QUERY_ENGINE_BINARY = "/nix/store/w6lhwd7ailwb2fgibm250cqk8z88ylsn-prisma-engines-6.18.0/bin/query-engine";
+    PRISMA_SCHEMA_ENGINE_BINARY = "/nix/store/w6lhwd7ailwb2fgibm250cqk8z88ylsn-prisma-engines-6.18.0/bin/schema-engine";
   };
+
+  # Add local bin to PATH
+  home.sessionPath = [ "$HOME/.local/bin" ];
 
   home.packages = with pkgs; [
     google-chrome
     hello
-   prisma-engines
-        prisma
     waybar
     zathura
     unstable.jujutsu # Using unstable jujutsu
+    unstable.prisma # Using unstable Prisma (6.18.0)
     python3
     unzip
     niri
@@ -52,6 +51,8 @@ in {
     dwm
     zsh
   ];
+
+  
 
   # Rest of your configuration remains the same...
   home.file = { };

@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Prisma Studio wrapper for NixOS
+# Sets correct engine paths and starts studio
+
+export PRISMA_ENGINES_CHECKSUM_IGNORE_MISSING=1
+export PRISMA_QUERY_ENGINE_LIBRARY="/nix/store/w6lhwd7ailwb2fgibm250cqk8z88ylsn-prisma-engines-6.18.0/lib/libquery_engine.node"
+export PRISMA_QUERY_ENGINE_BINARY="/nix/store/w6lhwd7ailwb2fgibm250cqk8z88ylsn-prisma-engines-6.18.0/bin/query-engine"
+export PRISMA_SCHEMA_ENGINE_BINARY="/nix/store/w6lhwd7ailwb2fgibm250cqk8z88ylsn-prisma-engines-6.18.0/bin/schema-engine"
+
+echo "Starting Prisma Studio with NixOS engine paths..."
+echo "Studio will be available at http://localhost:5555"
+echo "Press Ctrl+C to stop"
+
+prisma studio "$@"

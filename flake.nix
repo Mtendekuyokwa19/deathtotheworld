@@ -2,6 +2,7 @@
   description = "my first flake";
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-25.05";
+    nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     quickshell = {
@@ -17,13 +18,17 @@
     jj.url = "github:jj-vcs/jj";
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, quickshell, noctalia, ... }:
+  outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, home-manager, quickshell, noctalia, ... }:
     let
       lib = nixpkgs.lib;
 
       androidSdk = pkgs.androidenv.androidPkgs.androidsdk;
       system = "x86_64-linux";
       pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
+      pkgs-unstable = import nixpkgs-unstable {
         inherit system;
         config.allowUnfree = true;
       };
@@ -43,8 +48,6 @@
           pkgs.flutter
           androidSdk
           pkgs.jdk17
-          prisma-engines
-          prisma
           libsecret
           pkg-config
         ];
@@ -53,10 +56,6 @@
           "-Dorg.gradle.project.android.aapt2FromMavenOverride=${androidSdk}/libexec/android-sdk/build-tools/34.0.0/aapt2";
         shellHook = ''
                    export PKG_CONFIG_PATH="${pkgs.openssl.dev}/lib/pkgconfig";
-                   export PRISMA_SCHEMA_ENGINE_BINARY="${pkgs.prisma-engines}/bin/schema-engine"
-                   export PRISMA_QUERY_ENGINE_BINARY="${pkgs.prisma-engines}/bin/query-engine"
-                   export PRISMA_QUERY_ENGINE_LIBRARY="${pkgs.prisma-engines}/lib/libquery_engine.node"
-                   export PRISMA_FMT_BINARY="${pkgs.prisma-engines}/bin/prisma-fmt"
           export WAYLAND_DISPLAY="''${WAYLAND_DISPLAY:-wayland-1}"
                      export XDG_SESSION_TYPE=wayland
                      export QT_QPA_PLATFORM=wayland
@@ -64,13 +63,13 @@
                      export MOZ_ENABLE_WAYLAND=1
                      
 
-                     # XWayland fallback for apps that need it
-                     export DISPLAY="''${DISPLAY:-:0}"
-                     
-                     # Flutter configuration
-                     export CHROME_EXECUTABLE="${pkgs.chromium}/bin/chromium"
-                     export PKG_CONFIG_PATH="${pkgs.libsecret}/lib/pkgconfig:${pkgs.gtk3}/lib/pkgconfig:$PKG_CONFIG_PATH"
-                     export LD_LIBRARY_PATH="${pkgs.libsecret}/lib:${pkgs.gtk3}/lib:$
+                      # XWayland fallback for apps that need it
+                      export DISPLAY="''${DISPLAY:-:0}"
+                      
+                      # Flutter configuration
+                      export CHROME_EXECUTABLE="${pkgs.chromium}/bin/chromium"
+                      export PKG_CONFIG_PATH="${pkgs.libsecret}/lib/pkgconfig:${pkgs.gtk3}/lib/pkgconfig:$PKG_CONFIG_PATH"
+                      export LD_LIBRARY_PATH="${pkgs.libsecret}/lib:${pkgs.gtk3}/lib:$
         '';
       };
 

@@ -123,6 +123,7 @@ services.timesyncd.enable = true;
     delta
     android-studio
     yazi
+    bun
     android-tools
     wget
 fzf
@@ -142,7 +143,6 @@ fzf
     xclip
     xsel
     genymotion
-    prisma
     cmake
     android-studio
     ninja
@@ -153,7 +153,6 @@ fzf
     zoxide
     i3
     dmenu
-    prisma-engines
     ghostty
     postgresql
     home-manager
