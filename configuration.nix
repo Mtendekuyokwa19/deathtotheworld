@@ -110,8 +110,10 @@ services.timesyncd.enable = true;
 
   environment.systemPackages = with pkgs; [
     vim
+    yt-dlp
     ollama
     firebase-tools
+    qbittorrent
     go
     # Re-enabled after upstream fix
     inputs.noctalia.packages.${"x86_64-linux"}.default
@@ -123,12 +125,15 @@ services.timesyncd.enable = true;
     android-studio
     yazi
     bun
+ ntfs3g
     android-tools
+  exfatprogs
     wget
 fzf
     helix
     openjdk
     i3
+    pgadmin4
     zsh
     xwayland
     swaybg
@@ -137,6 +142,7 @@ fzf
     ed
     ffmpeg-full
     arduino
+    albert
     vscode
     feh
     xclip
