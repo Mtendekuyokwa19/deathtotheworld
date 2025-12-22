@@ -1,5 +1,4 @@
 { config, pkgs, inputs, ... }:
-
 {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -142,6 +141,7 @@ fzf
     feh
     xclip
     xsel
+    vlc
     genymotion
     cmake
     android-studio
