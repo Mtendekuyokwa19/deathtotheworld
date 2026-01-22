@@ -134,6 +134,7 @@ fzf
     openjdk
     i3
     pgadmin4
+zeroad-unwrapped
     zsh
     xwayland
     swaybg
@@ -142,7 +143,6 @@ fzf
     ed
     ffmpeg-full
     arduino
-    albert
     vscode
     feh
     xclip

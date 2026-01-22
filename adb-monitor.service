@@ -1,0 +1,13 @@
+[Unit]
+Description=ADB Connection Monitor
+After=network.target
+
+[Service]
+Type=simple
+User=deathtotheworld
+ExecStart=/home/deathtotheworld/Desktop/flocki/adb_monitor.sh
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
