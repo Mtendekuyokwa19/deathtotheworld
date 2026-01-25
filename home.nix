@@ -10,7 +10,7 @@ in {
   home.homeDirectory = "/home/deathtotheworld";
   imports = [ ./links.nix ./sh.nix ];
 
-  home.stateVersion = "25.05";
+  home.stateVersion = "25.11";
 
   home.sessionVariables = {
     PKG_CONFIG_PATH =

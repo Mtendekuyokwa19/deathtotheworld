@@ -134,7 +134,6 @@ fzf
     openjdk
     i3
     pgadmin4
-zeroad-unwrapped
     zsh
     xwayland
     swaybg
@@ -262,7 +261,7 @@ zeroad-unwrapped
     enable = true;
     loadModels = [ "gemma2:2b" ];
   };
-  system.stateVersion = "25.05";
+  system.stateVersion = "25.11";
 
   virtualisation.libvirtd = {
     enable = true;
