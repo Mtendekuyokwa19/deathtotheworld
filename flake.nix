@@ -1,24 +1,20 @@
 {
   description = "my first flake";
   inputs = {
+
     nixpkgs.url = "nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    quickshell = {
-      url = "github:outfoxxed/quickshell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    noctalia = {
+   noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.quickshell.follows = "quickshell";
     };
     # jj.url="github:martinvo"
     jj.url = "github:jj-vcs/jj";
   };
 
-  outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, home-manager, quickshell, noctalia, ... }:
+  outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, home-manager, ... }:
     let
       lib = nixpkgs.lib;
 
@@ -39,7 +35,7 @@
           specialArgs = { inherit self inputs lib system; };
 
           modules =
-            [ ./configuration.nix ]; # Points to your system's config file
+            [ ./configuration.nix ./noctalia.nix ]; # Points to your system's config file
         };
       };
 
@@ -77,24 +73,7 @@
         deathtotheworld = home-manager.lib.homeManagerConfiguration {
           pkgs = pkgs;
           extraSpecialArgs = { inherit inputs system; };
-          modules = [
-            ./home.nix
-            # Optional: Add noctalia configuration directly here
-            {
-              home.packages = [ quickshell.packages.${system}.default ];
-
-              # Create the quickshell config directory structure
-              xdg.configFile."quickshell/noctalia-shell" = {
-                source =
-                  "${noctalia.packages.${system}.default}/share/quickshell";
-                recursive = true;
-              };
-
-              # Alternative: if noctalia provides a different structure
-              # xdg.configFile."quickshell/noctalia-shell/shell.qml".source = 
-              #   "${noctalia.packages.${system}.default}/shell.qml";
-            }
-          ];
+          modules = [ ./home.nix ];
         };
       };
     };

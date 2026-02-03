@@ -22,11 +22,7 @@
     efi.canTouchEfiVariables = true; # Added for UEFI
   };
 
-  services.xserver = {
-    layout = "us";
-    xkbOptions = "caps:swapescape";
-  };
-services.timesyncd.enable = true; 
+  services.timesyncd.enable = true; 
   networking.hostName = "nixos"; # Define your hostname.
   networking.networkmanager.enable = true;
   nixpkgs.config.android_sdk.accept_license = true;
@@ -52,6 +48,7 @@ services.timesyncd.enable = true;
   services.xserver.xkb = {
     layout = "us";
     variant = "";
+    options = "caps:swapescape";
   };
   programs.adb.enable = true;
 
@@ -115,8 +112,6 @@ services.timesyncd.enable = true;
     firebase-tools
     qbittorrent
     go
-    # Re-enabled after upstream fix
-    inputs.noctalia.packages.${"x86_64-linux"}.default
     godot
     nushell
     aria2
@@ -138,6 +133,7 @@ fzf
     xwayland
     swaybg
     swww
+    jetbrains.idea-oss
     openssl
     ed
     ffmpeg-full
@@ -265,10 +261,7 @@ fzf
 
   virtualisation.libvirtd = {
     enable = true;
-    qemu = {
-      package = pkgs.qemu_kvm;
-      ovmf.enable = true;
-    };
+    qemu.package = pkgs.qemu_kvm;
   };
 
 }
