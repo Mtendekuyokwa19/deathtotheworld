@@ -55,15 +55,11 @@ layout {
         inactive-color "#111716"
     }
 
-    border {
-        off
-    }
 }
 
 spawn-at-startup "/usr/lib/polkit-kde-authentication-agent-1"
 spawn-at-startup "noctalia-shell"
 
-prefer-no-csd
 
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 

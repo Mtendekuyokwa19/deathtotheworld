@@ -22,11 +22,21 @@
       system = "x86_64-linux";
       pkgs = import nixpkgs {
         inherit system;
-        config.allowUnfree = true;
+        config = {
+          allowUnfree = true;
+          permittedInsecurePackages = [
+            "qtwebengine-5.15.19"
+          ];
+        };
       };
       pkgs-unstable = import nixpkgs-unstable {
         inherit system;
-        config.allowUnfree = true;
+        config = {
+          allowUnfree = true;
+          permittedInsecurePackages = [
+            "qtwebengine-5.15.19"
+          ];
+        };
       };
     in {
       nixosConfigurations = {
